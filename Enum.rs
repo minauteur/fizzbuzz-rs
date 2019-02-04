@@ -10,10 +10,10 @@ enum FizzBuzzNum {
 impl fmt::Display for FizzBuzzNum {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
-            FizzBuzzNum::IsFizz => f.write_str("Fizz"),
-            FizzBuzzNum::IsBuzz => f.write_str("Buzz"),
-            FizzBuzzNum::IsFizzBuzz => f.write_str("FizzBuzz"),
-            FizzBuzzNum::IsNum(num) => write!(f, "{}", num),
+            FizzBuzzNum::IsFizz => f.write_str("Fizz\n"),
+            FizzBuzzNum::IsBuzz => f.write_str("Buzz\n"),
+            FizzBuzzNum::IsFizzBuzz => f.write_str("FizzBuzz\n"),
+            FizzBuzzNum::IsNum(num) => write!(f, "{}\n", num),
         }
     }
 }
@@ -24,7 +24,7 @@ impl fmt::Debug for FizzBuzzNum {
     }
 }
 
-fn fizzbuzz(i: i32) -> FizzBuzzNum {
+fn fizzbuzz(i: &i32) -> FizzBuzzNum {
     if i % 15 == 0 {
         FizzBuzzNum::IsFizzBuzz
     } else if i % 5 == 0 {
@@ -32,12 +32,16 @@ fn fizzbuzz(i: i32) -> FizzBuzzNum {
     } else if i % 3 == 0 {
         FizzBuzzNum::IsFizz
     } else {
-        FizzBuzzNum::IsNum(i)
+        FizzBuzzNum::IsNum(*i)
     }
 }
 
 fn main() {
-    for i in 1..100 {
-        println!("{}", fizzbuzz(i));
-    }
+    let mut res: Vec<String> = Vec::new();
+    (1..100).for_each(|i| res.push(format!("{}",fizzbuzz(&i))));
+    print!("{}", res.join(""));
+    // for i in 1..100 {
+        
+    //     println!("{}", fizzbuzz(i));
+    // }
 }
