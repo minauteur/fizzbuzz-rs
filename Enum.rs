@@ -37,8 +37,8 @@ fn fizzbuzz(i: &i32) -> FizzBuzzNum {
 }
 
 fn main() {
-    let mut res: Vec<String> = Vec::new();
-    (1..100).for_each(|i| res.push(format!("{}",fizzbuzz(&i))));
+    let mut res: Vec<_> = Vec::new();
+    (1..100).for_each(|i| res.push(fizzbuzz(&i).to_string()));
     print!("{}", res.join(""));
     // for i in 1..100 {
         
